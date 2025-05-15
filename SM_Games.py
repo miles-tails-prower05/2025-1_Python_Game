@@ -2,7 +2,7 @@
 import time
 
 ### 함수 정의 ############################################################################
-## 기능 관련 함수
+## 기능 관련 함수 ##########
 # 문장 출력 함수
 def print_sentence(sentence, timesl=0.06):      # https://yanoos.tistory.com/10 참고하였음
     for i in range(len(sentence)):
@@ -31,7 +31,7 @@ def print_image(image, title):
 
     root.mainloop()
 
-## 내용 관련 함수
+## 내용 관련 함수 ##########
 # 인물 소개 함수
 def introduce_character(name):
     introduce_NaUisa = [
