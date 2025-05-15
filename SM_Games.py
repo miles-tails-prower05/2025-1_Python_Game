@@ -161,6 +161,18 @@ def investigate_suspect(name):
         time.sleep(0.5)
         print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
 
+# 용의자를 조사한 후의 행동을 위한 리스트와 함수
+after_investigation_action_list = [
+    "\n\n무엇을 하시겠습니까?",
+    "[1] 용의자 정보보기",
+    "[2] 다른 용의자 조사하기",
+    "[3] 다른 일하기"
+]
+def select_after_investigation_action():
+    action = 0
+    while (action != 1) and (action != 2) and (action != 3):
+        action = print_list_and_scan_input(after_investigation_action_list)
+
 
 # 선택한 행동을 입력받기 위한 리스트와 함수
 action_list = [
@@ -174,7 +186,7 @@ def select_action():
     while (action != 1) and (action != 2) and (action != 3):
         action = print_list_and_scan_input(action_list)
     
-    start_action(action)
+    # start_action(action)  # 이것을 지우면 작동이 안 됨
 
 # 선택한 행동을 실행하는 함수
 def start_action(action):
