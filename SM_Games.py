@@ -110,7 +110,7 @@ def investigate_suspect(suspect):
     else:
         print_list(eval(f"suspect_{name}")[0:len(eval(f"introduce_{name}"))-1])
         time.sleep(0.5)
-        print_sentence(eval(f"suspect_{name}")[len(eval(f"introduce_{name}"))-1]) # 마저 작성하기
+        print_sentence(eval(f"suspect_{name}")[len(eval(f"introduce_{name}"))]) # 마저 작성하기
 
 
 # 선택한 행동을 입력받기 위한 리스트와 함수
@@ -128,7 +128,7 @@ def select_action():
 def start_action(action):
     if action == 1:
         select_suspect_to_investigate()
-    elif # 마저 작성하기
+    elif action == 2: # 마저 작성하기
 
 ##########################################################################################
 
