@@ -100,9 +100,18 @@ suspect_list = [
 def select_suspect_to_investigate():
     print_list_and_scan_input(suspect_list) # 마저 작성하기
 
-# 용의자를 조사하는 함수
+# 용의자를 조사하기 위한 리스트와 함수
+suspect_NaUisa = [
+    ""
+]
 def investigate_suspect(suspect):
-    pass
+    if suspect == "":
+        pass
+    else:
+        print_list(eval(f"suspect_{name}")[0:len(eval(f"introduce_{name}"))-1])
+        time.sleep(0.5)
+        print_sentence(eval(f"suspect_{name}")[len(eval(f"introduce_{name}"))-1]) # 마저 작성하기
+
 
 # 선택한 행동을 입력받기 위한 리스트와 함수
 action_list = [
