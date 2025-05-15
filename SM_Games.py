@@ -34,7 +34,7 @@ def print_image(image, title):
 # 선택지를 출력하고 입력받는 함수
 def print_list_and_scan_input(list):
     print_list(list, 0.03, False)
-    user_input = input("번호를 입력하고 [Enter]를 누르세요: ")
+    user_input = int(input("번호를 입력하고 [Enter]를 누르세요: "))
     return user_input
 
 
@@ -90,7 +90,7 @@ def introduce_character(name):
 
 # 조사할 용의자를 선택하기 위한 리스트와 함수
 suspect_list = [
-    "<<<<< 용의자 조사하기 >>>>>", 
+    "\n\n<<<<< 용의자 조사하기 >>>>>\n", 
     "누구를 조사하시겠습니까?",
     "[1] 나의사", 
     "[2] 김건달", 
@@ -190,7 +190,9 @@ for name in ["NaUisa", "KimGundal", "LeeBuja", "LeeGurim", "ChoiBaeksu", "LeeHug
 # 테스트용 코드
 #investigate_suspect("KimGundal")
 
-#while True:
-action = select_action()
-start_action(action)
+while True:
+    action = select_action()
+    start_action(action)
+    
+    break
 ##########################################################################################
