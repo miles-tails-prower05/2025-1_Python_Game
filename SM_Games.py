@@ -90,6 +90,7 @@ def introduce_character(name):
 
 # 조사할 용의자를 선택하기 위한 리스트와 함수
 suspect_list = [
+    "<<<<< 용의자 조사하기 >>>>>", 
     "누구를 조사하시겠습니까?",
     "[1] 나의사", 
     "[2] 김건달", 
@@ -98,19 +99,52 @@ suspect_list = [
     "[5] 최백수"
 ]
 def select_suspect_to_investigate():
-    print_list_and_scan_input(suspect_list) # 마저 작성하기
+    suspect = print_list_and_scan_input(suspect_list) # 마저 작성하기
 
 # 용의자를 조사하기 위한 리스트와 함수
 suspect_NaUisa = [
-    ""
+    "[나의사]: 제가 피해자를 봤을 때 입에 거품을 물고 있었어요.", 
+    "          보통 이런경우는 잘못된 음식을 먹었을 경우가 높은데 식량 관리 하시는 이부자씨가 음식에 뭘 넣은건 아닐지... ", 
+    "(의사씨 말이면 충분히 믿을만하지 부자씨한테 가봐야겠어)"
 ]
-def investigate_suspect(suspect):
-    if suspect == "":
-        pass
-    else:
-        print_list(eval(f"suspect_{name}")[0:len(eval(f"introduce_{name}"))-1])
+suspect_KimGundal = [
+    "[김건달]: 내가 아무리 그 XX를 친적이 있긴 했어도 나겠어 형씨?", 
+    "          어제밤에 난 계속 자고 있었어. 또 뭐 혼자 쳐먹다가 잘못먹어서 죽은거겠지.", 
+    "          식량만 축내는놈 죽었으니 식량도 여유생기고 좋네.", 
+    "          정 궁금하면 그림쟁이한테 가봐. 어제보니 잠도 안자고 그림만 그리더만.",
+    "(흠.. 계속 잤다더니 어떻게 그림씨가 안자는걸 알고있지?)"
+]
+suspect_LeeBuja = [
+    "[이부자]: 어제 본거있냐고?", 
+    "          식량 보관소 옆에서 자긴했는데 뭐 딱히 본 건 없어.", 
+    "          아 맞다 그러고보니 어제 큰 소리가 한번 났던것 같기도 한데...", 
+    "          잠결에 들은거라 몰라 난~ 허기씨도 참 딱하구먼...", 
+    "          그래도 이러면 구조대 오기까지 식량은 남겠구먼 이 식량 다 나중에 갚아야 하는거 알제?", 
+    "(큰 소리...? 싸움이라도 있었던건가)"
+]
+suspect_LeeGurim = [
+    "[이그림]: 예술은 죽음!!! 죽음으로 이루어지지!!!", 
+    "          난 그걸 봤다고!! 봤어!!!!", 
+    "          신이시여!! 감사합니다! 이런 은혜를!!",
+    "(어제 뭘본거지? 전보다 더 이상해졌어... 더이상의 대화는 안통할 것 같군)"
+]
+suspect_ChoiBaeksu = [
+    "[최백수]: 어... 어제 발견했을때는 입에 거품을 물고 있었어요.", 
+    "          근데 신기한게 출혈이 없더라고요...", 
+    "          근데 이건 왜... 저 의심하는건 아니죠...? 전 진짜 아니에요..", 
+    "          하하... 제가 왜 사람을 죽였겠어요.. 근데 손에 이걸 들고 있었어요..",
+    "(이건 커터칼 인데... 설마 그림씨가? 근데 왜 백수씨는 말을 떨지? 원래 안그랬는데...)"
+]
+def investigate_suspect(name):
+    if name == "ChoiBaeksu":
+        print_list(eval(f"suspect_{name}")[0:len(eval(f"suspect_{name}"))-1])
+        # 여기에 사진 출력 코드 삽입
         time.sleep(0.5)
-        print_sentence(eval(f"suspect_{name}")[len(eval(f"introduce_{name}"))]) # 마저 작성하기
+        print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
+    else:
+        print_list(eval(f"suspect_{name}")[0:len(eval(f"suspect_{name}"))-1])
+        time.sleep(0.5)
+        print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
 
 
 # 선택한 행동을 입력받기 위한 리스트와 함수
@@ -128,7 +162,7 @@ def select_action():
 def start_action(action):
     if action == 1:
         select_suspect_to_investigate()
-    elif action == 2: # 마저 작성하기
+    # elif action == 2: # 마저 작성하기
 
 ##########################################################################################
 
@@ -150,6 +184,9 @@ print("\n\n<<<<< 인물 소개 >>>>>\n")
 for name in ["NaUisa", "KimGundal", "LeeBuja", "LeeGurim", "ChoiBaeksu", "LeeHuggi"]: 
     introduce_character(name)
 
-while True:
-    start_action(select_action())
+# 테스트용 코드
+investigate_suspect("KimGundal")
+
+#while True:
+#    start_action(select_action())
 ##########################################################################################
