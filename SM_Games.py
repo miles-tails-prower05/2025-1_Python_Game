@@ -1,8 +1,8 @@
 ﻿# from tkinter import *
 import time
 
-### 함수 정의 ############################################################################
-## 출력 관련 함수 ##########
+##### 함수 정의 ############################################################################
+### 출력 관련 함수 ##########
 # 문장 출력 함수
 def print_sentence(sentence, timesl=0.06):      # https://yanoos.tistory.com/10 참고하였음
     for i in range(len(sentence)):
@@ -17,7 +17,7 @@ def print_list(list, timesl=0.06, newline=False):
             print("\n")
         else:
             print("")
-    print("\n")
+    # print("\n")
 
 # 이미지 출력 함수
 def print_image(image, title):
@@ -38,7 +38,8 @@ def print_list_and_scan_input(list):
     return user_input
 
 
-## 진행 관련 함수 ##########
+### 진행 관련 함수 ##########
+## 인물 소개
 # 인물 소개용 리스트와 함수
 introduce_NaUisa = [
     "[나의사]", 
@@ -46,7 +47,7 @@ introduce_NaUisa = [
     "- 가방안에 다수의 약이 존재한다", 
     "- 현실적인편", 
     "- 매우 똑똑함", 
-    "- 허기씨에게 1회용 주사기를 이용해 인슐린 주사를 도움"
+    "- 허기씨에게 1회용 주사기를 이용해 인슐린 주사를 도움\n"
 ]
 introduce_KimGundal = [
     "[김건달]", 
@@ -54,14 +55,14 @@ introduce_KimGundal = [
     "- 건들지 않으면 가만히있음", 
     "- 말보다 행동이 앞서는 편", 
     "- 조직생활 당시 맞은 상처가 안보이도록 때리기에 능숙했음", 
-    "- 허기씨와 최근에 크게 싸움"
+    "- 허기씨와 최근에 크게 싸움\n"
 ]
 introduce_LeeBuja = [
     "[이부자]", 
     "- 사업가", 
     "- 조난 당시 가장 먼저 식량을 발견함", 
     "- 식량 관리를 담당중임", 
-    "- 계산적임"
+    "- 계산적임\n"
 ]
 introduce_LeeGurim = [
     "[이그림]", 
@@ -69,34 +70,49 @@ introduce_LeeGurim = [
     "- 최소한의 식량만 챙김", 
     "- 죽음을 하나의 예술로 생각", 
     "- 사람이 죽어가는 그림을 그림", 
-    "- 처음 만났을때 대화에 따르면 조각에는 흥미가 없어 그림만 그린다고 함"
+    "- 처음 만났을 때 대화에 따르면 조각에는 흥미가 없어 그림만 그린다고 함\n"
 ]
 introduce_ChoiBaeksu = [
     "[최백수]", 
     "- 무직", 
     "- 긴장하면 말을 절음", 
     "- 무인도에서 의사 다음으로 똑똑함", 
-    "- 사건현장 최초 목격자"
+    "- 사건현장 최초 목격자\n"
 ]
 introduce_LeeHuggi = [
     "[이허기]", 
     "- 당뇨병 환자", 
     "- 먹는 양이 많음", 
     "- 최근에 건달씨와 크게 싸움", 
-    "- 새벽에 몰래 식량보관소에서 음식을 먹다 걸린적이 있음"
+    "- 새벽에 몰래 식량보관소에서 음식을 먹다 걸린적이 있음\n"
 ]
 def introduce_character(name):
     print_list(eval(f"introduce_{name}"), 0.03)
 
+## 행동 선택
+# 선택한 행동을 입력받기 위한 리스트와 함수
+action_list = [
+    "\n\n무엇을 하시겠습니까?",
+    "[1] 용의자 조사하기",
+    "[2] 장소 조사하기",
+    "[3] 범인 지목하기\n"
+]
+def select_action(): 
+    action = 0
+    while (action != 1) and (action != 2) and (action != 3):
+        action = print_list_and_scan_input(action_list)
+    return action
+
+## 용의자 조사
 # 조사할 용의자를 선택하기 위한 리스트와 함수
 suspect_list = [
-    "\n\n<<<<< 용의자 조사하기 >>>>>\n", 
+    "\n\n\n<<<<< 용의자 조사하기 >>>>>\n", 
     "누구를 조사하시겠습니까?",
     "[1] 나의사", 
     "[2] 김건달", 
     "[3] 이부자", 
     "[4] 이그림", 
-    "[5] 최백수"
+    "[5] 최백수\n"
 ]
 def select_suspect_to_investigate():
     suspect = 0
@@ -118,78 +134,186 @@ def select_suspect_to_investigate():
 
 # 용의자를 조사하기 위한 리스트와 함수
 suspect_NaUisa = [
-    "\n[나의사]: 제가 피해자를 봤을 때 입에 거품을 물고 있었어요.", 
+    "[나의사]: 제가 피해자를 봤을 때 입에 거품을 물고 있었어요.", 
     "          보통 이런경우는 잘못된 음식을 먹었을 경우가 높은데 식량 관리 하시는 이부자씨가 음식에 뭘 넣은건 아닐지... ", 
-    "(의사씨 말이면 충분히 믿을만하지 부자씨한테 가봐야겠어)"
+    "\n(의사씨 말이면 충분히 믿을만하지 부자씨한테 가봐야겠어)"
 ]
 suspect_KimGundal = [
-    "\n[김건달]: 내가 아무리 그 XX를 친적이 있긴 했어도 나겠어 형씨?", 
+    "[김건달]: 내가 아무리 그 XX를 친적이 있긴 했어도 나겠어 형씨?", 
     "          어제밤에 난 계속 자고 있었어. 또 뭐 혼자 쳐먹다가 잘못먹어서 죽은거겠지.", 
     "          식량만 축내는놈 죽었으니 식량도 여유생기고 좋네.", 
     "          정 궁금하면 그림쟁이한테 가봐. 어제보니 잠도 안자고 그림만 그리더만.",
-    "(흠.. 계속 잤다더니 어떻게 그림씨가 안자는걸 알고있지?)"
+    "\n(흠.. 계속 잤다더니 어떻게 그림씨가 안자는걸 알고있지?)"
 ]
 suspect_LeeBuja = [
-    "\n[이부자]: 어제 본거있냐고?", 
+    "[이부자]: 어제 본거있냐고?", 
     "          식량 보관소 옆에서 자긴했는데 뭐 딱히 본 건 없어.", 
     "          아 맞다 그러고보니 어제 큰 소리가 한번 났던것 같기도 한데...", 
     "          잠결에 들은거라 몰라 난~ 허기씨도 참 딱하구먼...", 
     "          그래도 이러면 구조대 오기까지 식량은 남겠구먼 이 식량 다 나중에 갚아야 하는거 알제?", 
-    "(큰 소리...? 싸움이라도 있었던건가)"
+    "\n(큰 소리...? 싸움이라도 있었던건가)"
 ]
 suspect_LeeGurim = [
-    "\n[이그림]: 예술은 죽음!!! 죽음으로 이루어지지!!!", 
+    "[이그림]: 예술은 죽음!!! 죽음으로 이루어지지!!!", 
     "          난 그걸 봤다고!! 봤어!!!!", 
     "          신이시여!! 감사합니다! 이런 은혜를!!",
-    "(어제 뭘본거지? 전보다 더 이상해졌어... 더이상의 대화는 안통할 것 같군)"
+    "\n(어제 뭘본거지? 전보다 더 이상해졌어... 더이상의 대화는 안통할 것 같군)"
 ]
 suspect_ChoiBaeksu = [
-    "\n[최백수]: 어... 어제 발견했을때는 입에 거품을 물고 있었어요.", 
+    "[최백수]: 어... 어제 발견했을때는 입에 거품을 물고 있었어요.", 
     "          근데 신기한게 출혈이 없더라고요...", 
     "          근데 이건 왜... 저 의심하는건 아니죠...? 전 진짜 아니에요..", 
     "          하하... 제가 왜 사람을 죽였겠어요.. 근데 손에 이걸 들고 있었어요..",
-    "(이건 커터칼 인데... 설마 그림씨가? 근데 왜 백수씨는 말을 떨지? 원래 안그랬는데...)"
+    "\n(이건 커터칼 인데... 설마 그림씨가? 근데 왜 백수씨는 말을 떨지? 원래 안그랬는데...)"
 ]
 def investigate_suspect(name):
     if name == "ChoiBaeksu":
+        print("\n\n\n")
         print_list(eval(f"suspect_{name}")[0:len(eval(f"suspect_{name}"))-1])
         # 여기에 사진 출력 코드 삽입
         time.sleep(0.5)
         print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
     else:
+        print("\n\n\n")
         print_list(eval(f"suspect_{name}")[0:len(eval(f"suspect_{name}"))-1])
         time.sleep(0.5)
         print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
 
 # 용의자를 조사한 후의 행동을 위한 리스트와 함수
-after_investigation_action_list = [
-    "\n\n그 다음으로 무엇을 하시겠습니까?",
+after_suspect_investigation_action_list = [
+    "\n\n\n그 다음으로 무엇을 하시겠습니까?",
     "[1] 용의자 정보보기",
     "[2] 다른 용의자 조사하기",
-    "[3] 다른 일하기"
+    "[3] 돌아가기\n"
 ]
-def select_after_investigation_action():
+def select_after_suspect_investigation_action():
     action = 0
     while (action != 1) and (action != 2) and (action != 3):
-        action = print_list_and_scan_input(after_investigation_action_list)
+        action = print_list_and_scan_input(after_suspect_investigation_action_list)
     return action
+
+# 용의자 조사를 처리하는 함수
+def process_investigating_suspect():
+    suspect_investigating = True
+    while suspect_investigating == True: 
+        suspect = select_suspect_to_investigate()
+        investigate_suspect(suspect)
+
+        after_investigation = select_after_suspect_investigation_action()
+        if after_investigation == 1:
+            print("\n\n\n")
+            introduce_character(suspect)
+            suspect_investigating = False
+            continue
+        elif after_investigation == 2:
+            suspect_investigating = True
+            continue
+        elif after_investigation == 3:
+            suspect_investigating = False
+            continue
     
-# 선택한 행동을 입력받기 위한 리스트와 함수
-action_list = [
-    "\n\n무엇을 하시겠습니까?",
-    "[1] 용의자 조사하기",
-    "[2] 장소 조사하기",
-    "[3] 범인 지목하기"
+## 장소 조사
+# 조사할 장소를 선택하기 위한 리스트와 함수
+place_list = [
+    "\n\n\n<<<<< 장소 조사하기 >>>>>\n", 
+    "어디를 조사하시겠습니까?",
+    "[1] 숲속",
+    "[2] 허기씨의 가방", 
+    "[3] 식량 보관소", 
+    "[4] 사건현장", 
+    "[5] 바닷가",
+    "[6] 김그림씨의 가방\n"
 ]
-def select_action(): 
+def select_place():
+    place = 0
+    while (place != 1) and (place != 2) and (place != 3) and (place != 4) and (place != 5) and (place != 6):
+        place = print_list_and_scan_input(place_list)
+    return place
+
+#장소를 조사하기 위한 리스트와 함수
+place_forest = [
+    "\n\n\n숲속을 한 번 찾아보자.",
+    "터벅",
+    "터벅",
+    "이게 뭐지...", 
+    "이건 종이인데.. 타버려서 어떤 종이인지는 잘 모르겠군"
+]
+place_Huggi_bag = [
+    "\n\n\n가방안에 약이 많네...", 
+    "저번에 당뇨병이 있다고는 들었는데... (약이 든 가방 사진)"
+]
+place_storage = [
+    "\n\n\n난장판이 되었군 마치 누가 싸운듯...", 
+    "허기씨는 여기서 쓰러지고 누군가가 밖으로 옮긴 걸지도 몰라"
+]
+place_the_scene = [
+    "\n\n\n이건 뭐지 다잉 메세지인가?", 
+    "바닥이 모래라 일부가 지워졌군.", 
+    "그래도 중요한 단서를 얻었군."
+]
+place_beach = [
+    "\n\n\n여긴 단서가 없는것 같군.", 
+    "다른곳으로 가봐야겠어."
+]
+place_Gurim_bag = [
+    "\n\n\n왜 부러진 커터칼 나머지 부분이 그림씨 가방에 있는 거지?"
+]
+def investigate_place(place):
+    if place == 1:
+        print_list(place_forest[0:2])
+        time.sleep(1)
+        print_sentence(place_forest[2] + "\n")
+        time.sleep(1)
+        print_sentence(place_forest[3])
+        # 여기에 사진 출력 코드 입력
+        print_sentence(place_forest[4])
+    elif place == 2:
+        print_list(place_Huggi_bag)
+        # 여기에 사진 출력 코드 입력
+    elif place == 3:
+        # 여기에 사진 출력 코드 출력
+        print_list(place_storage)
+    elif place == 4: 
+        # 여기에 사진 출력 코드 출력
+        print_list(place_the_scene)
+    elif place == 5:
+        # 여기에 사진 출력 코드 출력
+        print_list(place_beach)
+    elif place == 6:
+        # 여기에 사진 출력 코드 출력
+        print_list(place_Gurim_bag)
+
+# 장소를 조사한 후의 행동을 위한 리스트와 함수
+after_place_investigation_action_list = [
+    "\n\n\n그 다음으로 무엇을 하시겠습니까?",
+    "[1] 다른 장소 조사하기",
+    "[2] 돌아가기\n"
+]
+def select_after_place_investigation_action():
     action = 0
-    while (action != 1) and (action != 2) and (action != 3):
-        action = print_list_and_scan_input(action_list)
+    while (action != 1) and (action != 2):
+        action = print_list_and_scan_input(after_place_investigation_action_list)
     return action
+
+# 장소 조사를 처리하는 함수
+def process_investigating_place():
+    place_investigating = True
+    while place_investigating == True:
+        place = select_place()
+        investigate_place(place)
+
+        after_investigation = select_after_place_investigation_action()
+        if after_investigation == 1:
+            place_investigating = True
+            continue
+        elif after_investigation == 2:
+            place_investigating = False
+            continue
+
 ##########################################################################################
 
 
-### 게임 코드 ############################################################################
+##### 게임 코드 ############################################################################
 intro_story = [
     "한 비행기가 운행 중 갑작스러운 난기류에 휩쓸리게 된다.", 
     "이로 인해 비행기 안에 있던 대부분의 사람은 사망하고 말았지만 일부 사람들은 사고로 인한 큰 부상이 없었던 [나의사]의 도움으로 목숨을 구할 수 있었다.", 
@@ -210,24 +334,9 @@ while True:
     action = select_action()
 
     if action == 1:
-        investigating = 1
-        while investigating == 1: 
-            suspect = select_suspect_to_investigate()
-            investigate_suspect(suspect)
-
-            after_investigation = select_after_investigation_action()
-            if after_investigation == 1:
-                introduce_character(suspect)
-                investigating = 0
-                continue
-            elif after_investigation == 2:
-                investigating = 1
-                continue
-            elif after_investigation == 3:
-                investigating = 0
-                continue
-    # elif action == 2: # 마저 작성하기
-
+        process_investigating_suspect()
+    elif action == 2: 
+        process_investigating_place()
     
     # break
 ##########################################################################################
