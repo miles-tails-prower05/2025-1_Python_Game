@@ -163,7 +163,7 @@ def investigate_suspect(name):
 
 # 용의자를 조사한 후의 행동을 위한 리스트와 함수
 after_investigation_action_list = [
-    "\n\n무엇을 하시겠습니까?",
+    "\n\n그 다음으로 무엇을 하시겠습니까?",
     "[1] 용의자 정보보기",
     "[2] 다른 용의자 조사하기",
     "[3] 다른 일하기"
@@ -172,8 +172,8 @@ def select_after_investigation_action():
     action = 0
     while (action != 1) and (action != 2) and (action != 3):
         action = print_list_and_scan_input(after_investigation_action_list)
-
-
+    return action
+    
 # 선택한 행동을 입력받기 위한 리스트와 함수
 action_list = [
     "\n\n무엇을 하시겠습니까?",
@@ -185,16 +185,7 @@ def select_action():
     action = 0
     while (action != 1) and (action != 2) and (action != 3):
         action = print_list_and_scan_input(action_list)
-    
-    # start_action(action)  # 이것을 지우면 작동이 안 됨
-
-# 선택한 행동을 실행하는 함수
-def start_action(action):
-    if action == 1:
-        suspect = select_suspect_to_investigate()
-        investigate_suspect(suspect)
-    # elif action == 2: # 마저 작성하기
-
+    return action
 ##########################################################################################
 
 
@@ -215,12 +206,28 @@ print("\n\n<<<<< 인물 소개 >>>>>\n")
 for name in ["NaUisa", "KimGundal", "LeeBuja", "LeeGurim", "ChoiBaeksu", "LeeHuggi"]: 
     introduce_character(name)
 
-# 테스트용 코드
-#investigate_suspect("KimGundal")
-
 while True:
     action = select_action()
-    start_action(action)
+
+    if action == 1:
+        investigating = 1
+        while investigating == 1: 
+            suspect = select_suspect_to_investigate()
+            investigate_suspect(suspect)
+
+            after_investigation = select_after_investigation_action()
+            if after_investigation == 1:
+                introduce_character(suspect)
+                investigating = 0
+                continue
+            elif after_investigation == 2:
+                investigating = 1
+                continue
+            elif after_investigation == 3:
+                investigating = 0
+                continue
+    # elif action == 2: # 마저 작성하기
+
     
-    break
+    # break
 ##########################################################################################
