@@ -310,6 +310,23 @@ def process_investigating_place():
             place_investigating = False
             continue
 
+## 범인 지목
+# 범인 지목을 위한 리스트와 함수
+criminal_list = [
+    "\n\n\n<<<<< 범인 지목하기 >>>>>\n", 
+    "누구를 지목하시겠습니까?",
+    "[1] 나의사", 
+    "[2] 김건달", 
+    "[3] 이부자", 
+    "[4] 이그림", 
+    "[5] 최백수\n"
+]
+def select_criminal():
+    criminal = 0
+    while (criminal != 1) and (criminal != 2) and (criminal != 3) and (criminal != 4) and (criminal != 5):
+        criminal = print_list_and_scan_input(criminal_list)
+    return criminal
+
 ##########################################################################################
 
 
@@ -337,6 +354,8 @@ while True:
         process_investigating_suspect()
     elif action == 2: 
         process_investigating_place()
+    elif action == 3:
+        # 범인 지목하기
     
     # break
 ##########################################################################################
