@@ -325,8 +325,62 @@ def select_criminal():
     criminal = 0
     while (criminal != 1) and (criminal != 2) and (criminal != 3) and (criminal != 4) and (criminal != 5):
         criminal = print_list_and_scan_input(criminal_list)
-    return criminal
 
+    name_list = ["나의사", "김건달", "이부자", "이그림", "최백수"]
+    return name_list[criminal-1]
+
+# 범인 지목과 엔딩을 처리하기 위한 리스트와 함수
+ending_good = [
+    "\n\n\n\n\n범인은 당신이야!\n", 
+    "허기씨의 당뇨병을 이용해 인슐린을 과다 투여해 사망시키다니... 당신을 격리하겠습니다!\n",
+    "나의사: 어떻게....", 
+    "        난 해야할 일을 했을 뿐이야...", 
+    "        쟤가 있었으면 식량은 부족했을거라고!!", 
+    "        난 무죄야 난 무죄라고!!!!"
+]
+ending_bad = [
+    "\n\n\n\n\n범인은 당신입니다! 당신을 격리시키도록 하죠.\n", 
+    ": 억울해요.. 전 아니에요!!\n\n\n",
+    "그날 밤\n\n",
+    "뭐지... 왜 이렇게 아프지..? 어라 내 몸이 왜이래!\n",
+    "?: 일어나셨네 형사양반 당신이 마지막이야..", 
+    "   그러게 추리를 잘 좀 하시지... 다음생에는 만나지 말자고~\n",
+    "으아아악!!!"
+]
+credit = [
+    "< 무인도 살인사건 추리 게임 >",
+    "",
+    "제작: SM게임즈",
+    "      - 팀장: 한승원", 
+    "      - 기획, 이미지 제작: 신동규", 
+    "      - 코딩: 박건우", 
+    "",
+    "      - 발표: 한승원", 
+    "      - 발표 자료 제작: 신동규", 
+    "",
+    "",
+    "플레이 해주셔서 감사합니다."
+]
+def process_ending():
+    criminal = select_criminal()
+
+    if criminal == "나의사":
+        print_list(ending_good)
+    else:
+        print_sentence(ending_bad[0])
+        print(f"{criminal}{ending_bad[1]}")
+
+        for x in range(5):
+            print(". ", end="")
+            time.sleep(0.4)
+        
+        print_list(ending_bad[2:])
+
+    time.sleep(0.4)
+    for y in range(10):
+        print("")
+        time.sleep(0.2)
+    print_list(credit)
 ##########################################################################################
 
 
@@ -355,7 +409,6 @@ while True:
     elif action == 2: 
         process_investigating_place()
     elif action == 3:
-        # 범인 지목하기
-    
-    # break
+        process_ending()
+        break
 ##########################################################################################
