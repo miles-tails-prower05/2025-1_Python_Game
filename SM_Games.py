@@ -1,4 +1,8 @@
-﻿
+﻿# 2025-1학기 게임프로그래밍입문
+# SM게임즈 - <무인도 살인사건 추리 게임>
+# 소스파일: https://github.com/miles-tails-prower05/2025-1_Python_Game/blob/main/SM_Games.py
+
+
 from tkinter import *
 import time
 
@@ -44,7 +48,7 @@ def print_list_and_scan_input(list):
 
 ### 진행 관련 함수 ##########
 ## 인물 소개
-# 인물 소개용 리스트와 함수
+# 인물 소개용 리스트
 introduce_NaUisa = [
     "[나의사]", 
     "- 의사", 
@@ -90,17 +94,19 @@ introduce_LeeHuggi = [
     "- 최근에 건달씨와 크게 싸움", 
     "- 새벽에 몰래 식량보관소에서 음식을 먹다 걸린적이 있음\n"
 ]
+# 인물 소개용 함수
 def introduce_character(name):
     print_list(eval(f"introduce_{name}"), 0.03)
 
 ## 행동 선택
-# 선택한 행동을 입력받기 위한 리스트와 함수
+# 선택한 행동을 입력받기 위한 리스트
 action_list = [
     "\n\n무엇을 하시겠습니까?",
     "[1] 용의자 조사하기",
     "[2] 장소 조사하기",
     "[3] 범인 지목하기\n"
 ]
+# 선택한 행동을 입력받기 위한 함수
 def select_action(): 
     action = 0
     while (action != 1) and (action != 2) and (action != 3):
@@ -108,7 +114,7 @@ def select_action():
     return action
 
 ## 용의자 조사
-# 조사할 용의자를 선택하기 위한 리스트와 함수
+# 조사할 용의자를 선택하기 위한 리스트
 suspect_list = [
     "\n\n\n<<<<< 용의자 조사하기 >>>>>\n", 
     "누구를 조사하시겠습니까?",
@@ -118,6 +124,7 @@ suspect_list = [
     "[4] 이그림", 
     "[5] 최백수\n"
 ]
+# 조사할 용의자를 선택하기 위한 함수
 def select_suspect_to_investigate():
     suspect = 0
     while (suspect != 1) and (suspect != 2) and (suspect != 3) and (suspect != 4) and (suspect != 5):
@@ -136,7 +143,7 @@ def select_suspect_to_investigate():
         else: 
             continue
 
-# 용의자를 조사하기 위한 리스트와 함수
+# 용의자를 조사하기 위한 리스트
 suspect_NaUisa = [
     "[나의사]: 제가 피해자를 봤을 때 입에 거품을 물고 있었어요.", 
     "          보통 이런경우는 잘못된 음식을 먹었을 경우가 높은데 식량 관리 하시는 이부자씨가 음식에 뭘 넣은건 아닐지... ", 
@@ -170,6 +177,7 @@ suspect_ChoiBaeksu = [
     "          하하... 제가 왜 사람을 죽였겠어요.. 근데 손에 이걸 들고 있었어요..",
     "\n(이건 커터칼 인데... 설마 그림씨가? 근데 왜 백수씨는 말을 떨지? 원래 안그랬는데...)"
 ]
+# 용의자를 조사하기 위한 함수
 def investigate_suspect(name):
     if name == "ChoiBaeksu":
         print("\n\n\n")
@@ -183,13 +191,14 @@ def investigate_suspect(name):
         time.sleep(0.5)
         print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
 
-# 용의자를 조사한 후의 행동을 위한 리스트와 함수
+# 용의자를 조사한 후의 행동을 위한 리스트
 after_suspect_investigation_action_list = [
     "\n\n\n그 다음으로 무엇을 하시겠습니까?",
     "[1] 용의자 정보보기",
     "[2] 다른 용의자 조사하기",
     "[3] 돌아가기\n"
 ]
+# 용의자를 조사한 후의 행동을 위한 함수
 def select_after_suspect_investigation_action():
     action = 0
     while (action != 1) and (action != 2) and (action != 3):
@@ -217,7 +226,7 @@ def process_investigating_suspect():
             continue
     
 ## 장소 조사
-# 조사할 장소를 선택하기 위한 리스트와 함수
+# 조사할 장소를 선택하기 위한 리스트
 place_list = [
     "\n\n\n<<<<< 장소 조사하기 >>>>>\n", 
     "어디를 조사하시겠습니까?",
@@ -228,13 +237,14 @@ place_list = [
     "[5] 바닷가",
     "[6] 김그림씨의 가방\n"
 ]
+# 조사할 장소를 선택하기 위한 함수
 def select_place():
     place = 0
     while (place != 1) and (place != 2) and (place != 3) and (place != 4) and (place != 5) and (place != 6):
         place = print_list_and_scan_input(place_list)
     return place
 
-#장소를 조사하기 위한 리스트와 함수
+#장소를 조사하기 위한 리스트
 place_forest = [
     "\n\n\n숲속을 한 번 찾아보자.\n\n",
     "터벅\n\n",
@@ -262,6 +272,7 @@ place_beach = [
 place_Gurim_bag = [
     "\n\n\n왜 부러진 커터칼 나머지 부분이 그림씨 가방에 있는 거지?"
 ]
+#장소를 조사하기 위한 함수
 def investigate_place(place):
     if place == 1:
         print_list(place_forest[0:2])
@@ -286,12 +297,13 @@ def investigate_place(place):
         print_list(place_Gurim_bag)
         print_image("image\CutterAndBag.png", 512, 341, "그림씨의 가방")
 
-# 장소를 조사한 후의 행동을 위한 리스트와 함수
+# 장소를 조사한 후의 행동을 위한 리스트
 after_place_investigation_action_list = [
     "\n\n\n그 다음으로 무엇을 하시겠습니까?",
     "[1] 다른 장소 조사하기",
     "[2] 돌아가기\n"
 ]
+# 장소를 조사한 후의 행동을 위한 함수
 def select_after_place_investigation_action():
     action = 0
     while (action != 1) and (action != 2):
@@ -314,7 +326,7 @@ def process_investigating_place():
             continue
 
 ## 범인 지목
-# 범인 지목을 위한 리스트와 함수
+# 범인 지목을 위한 리스트
 criminal_list = [
     "\n\n\n<<<<< 범인 지목하기 >>>>>\n", 
     "누구를 지목하시겠습니까?",
@@ -324,6 +336,7 @@ criminal_list = [
     "[4] 이그림", 
     "[5] 최백수\n"
 ]
+# 범인 지목을 위한 함수
 def select_criminal():
     criminal = 0
     while (criminal != 1) and (criminal != 2) and (criminal != 3) and (criminal != 4) and (criminal != 5):
@@ -332,7 +345,7 @@ def select_criminal():
     name_list = ["나의사", "김건달", "이부자", "이그림", "최백수"]
     return name_list[criminal-1]
 
-# 범인 지목과 엔딩을 처리하기 위한 리스트와 함수
+# 범인 지목과 엔딩을 처리하기 위한 리스트
 ending_good = [
     "\n\n\n\n\n범인은 당신이야!\n", 
     "허기씨의 당뇨병을 이용해 인슐린을 과다 투여해 사망시키다니... 당신을 격리하겠습니다!\n",
@@ -364,6 +377,7 @@ credit = [
     "",
     "플레이 해주셔서 감사합니다."
 ]
+# 범인 지목과 엔딩을 처리하기 위한 함수
 def process_ending():
     criminal = select_criminal()
 
