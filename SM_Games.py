@@ -4,6 +4,7 @@
 
 
 from tkinter import *
+import sys
 import time
 
 ##### 함수 정의 ############################################################################
@@ -12,6 +13,7 @@ import time
 def print_sentence(sentence, timesl=0.06):      # https://yanoos.tistory.com/10 참고하였음
     for i in range(len(sentence)):
         print(sentence[i], end="")
+        sys.stdout.flush()
         time.sleep(timesl)
 
 # 리스트의 문장을 출력하는 함수
@@ -399,6 +401,7 @@ def process_ending():
 
         for x in range(5):
             print(". ", end="")
+            sys.stdout.flush()
             time.sleep(0.4)
         
         print_list(ending_bad[2:])
@@ -406,6 +409,7 @@ def process_ending():
     time.sleep(0.4)
     for y in range(10):
         print("")
+        sys.stdout.flush()
         time.sleep(0.2)
     print_list(credit)
 ##########################################################################################
