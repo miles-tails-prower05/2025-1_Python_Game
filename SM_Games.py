@@ -1,4 +1,5 @@
-﻿# from tkinter import *
+﻿
+from tkinter import *
 import time
 
 ##### 함수 정의 ############################################################################
@@ -20,14 +21,17 @@ def print_list(list, timesl=0.06, newline=False):
     # print("\n")
 
 # 이미지 출력 함수
-def print_image(image, title):
+def print_image(image, W, H, title):
     root = Tk()
     root.configure(bg="white")
     root.title(title)
-    root.geometry("700x700")
+    root.geometry(f"{W}x{H}")
 
-    canvas = Canvas(root, width=700, height=700)
+    canvas = Canvas(root, width=W, height=H)
     canvas.pack()
+
+    img = PhotoImage(file=image).subsample(3, 3)
+    canvas.create_image(0, 0, anchor=NW, image=img)
 
     root.mainloop()
 
@@ -170,7 +174,7 @@ def investigate_suspect(name):
     if name == "ChoiBaeksu":
         print("\n\n\n")
         print_list(eval(f"suspect_{name}")[0:len(eval(f"suspect_{name}"))-1])
-        # 여기에 사진 출력 코드 삽입
+        print_image("image\BrokenCutter.png", 512, 341, "허기씨가 손에 들고 있던 것")
         time.sleep(0.5)
         print_sentence(eval(f"suspect_{name}")[len(eval(f"suspect_{name}"))-1])
     else:
@@ -232,15 +236,15 @@ def select_place():
 
 #장소를 조사하기 위한 리스트와 함수
 place_forest = [
-    "\n\n\n숲속을 한 번 찾아보자.",
-    "터벅",
-    "터벅",
+    "\n\n\n숲속을 한 번 찾아보자.\n\n",
+    "터벅\n\n",
+    "터벅\n\n",
     "이게 뭐지...", 
     "이건 종이인데.. 타버려서 어떤 종이인지는 잘 모르겠군"
 ]
 place_Huggi_bag = [
     "\n\n\n가방안에 약이 많네...", 
-    "저번에 당뇨병이 있다고는 들었는데... (약이 든 가방 사진)"
+    "저번에 당뇨병이 있다고는 들었는데..."
 ]
 place_storage = [
     "\n\n\n난장판이 되었군 마치 누가 싸운듯...", 
@@ -265,23 +269,22 @@ def investigate_place(place):
         print_sentence(place_forest[2] + "\n")
         time.sleep(1)
         print_sentence(place_forest[3])
-        # 여기에 사진 출력 코드 입력
+        print_image("image\BurnedPaper.png", 341, 341, "불타버린 종이")
         print_sentence(place_forest[4])
     elif place == 2:
         print_list(place_Huggi_bag)
-        # 여기에 사진 출력 코드 입력
+        print_image("image\DrugAndBag.png", 341, 512, "허기씨의 가방")
     elif place == 3:
-        # 여기에 사진 출력 코드 출력
         print_list(place_storage)
-    elif place == 4: 
-        # 여기에 사진 출력 코드 출력
+        print_image("image\FoodStorage.png", 341, 341, "식량 보관소")
+    elif place == 4:
         print_list(place_the_scene)
+        print_image("image\TheScene.png", 341, 512, "사건 현장")
     elif place == 5:
-        # 여기에 사진 출력 코드 출력
         print_list(place_beach)
     elif place == 6:
-        # 여기에 사진 출력 코드 출력
         print_list(place_Gurim_bag)
+        print_image("image\CutterAndBag.png", 512, 341, "그림씨의 가방")
 
 # 장소를 조사한 후의 행동을 위한 리스트와 함수
 after_place_investigation_action_list = [
@@ -339,12 +342,12 @@ ending_good = [
     "        난 무죄야 난 무죄라고!!!!"
 ]
 ending_bad = [
-    "\n\n\n\n\n범인은 당신입니다! 당신을 격리시키도록 하죠.\n", 
+    "\n\n\n\n\n범인은 당신입니다! 당신을 격리시키도록 하죠.\n\n", 
     ": 억울해요.. 전 아니에요!!\n\n\n",
     "그날 밤\n\n",
     "뭐지... 왜 이렇게 아프지..? 어라 내 몸이 왜이래!\n",
-    "?: 일어나셨네 형사양반 당신이 마지막이야..", 
-    "   그러게 추리를 잘 좀 하시지... 다음생에는 만나지 말자고~\n",
+    "???: 일어나셨네 형사양반 당신이 마지막이야..", 
+    "     그러게 추리를 잘 좀 하시지... 다음생에는 만나지 말자고~\n",
     "으아아악!!!"
 ]
 credit = [
